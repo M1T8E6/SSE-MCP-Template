@@ -1,0 +1,44 @@
+{
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "njpwerner.autodocstring",
+        "github.copilot",
+        "seatonjiang.gitmoji-vscode",
+        "ms-python.isort",
+        "eamodio.gitlens",
+        "andrewbutson.vscode-openapi-viewer",
+        "ms-python.pylint",
+        "ms-python.black-formatter",
+        "usernamehw.errorlens"
+      ],
+      "settings": {
+        "[python]": {
+          "editor.codeActionsOnSave": {
+            "source.fixAll": "always",
+            "source.organizeImports": "always"
+          },
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        },
+        "isort.args": [
+          "--profile",
+          "black"
+        ],
+        "pylint.args": [
+          "--disable=R,C"
+        ],
+        "python.analysis.typeCheckingMode": "basic"
+      }
+    }
+  },
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "initializeCommand": ".devcontainer/add-keys.sh || true",
+  "name": "MCP-SSE Template",
+  "service": "app",
+  "workspaceFolder": "/app"
+}

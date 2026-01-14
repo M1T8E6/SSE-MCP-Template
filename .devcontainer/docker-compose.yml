@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      target: dev
+    volumes:
+      - ..:/app
+    env_file:
+      - .env
+    privileged: true
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
