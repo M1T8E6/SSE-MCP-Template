@@ -1,5 +1,5 @@
 """Presentation layer - API endpoints and HTTP handling."""
 
-from .api import get_message_handler, router
+from .api import router, sse_transport
 
-__all__ = ["get_message_handler", "router"]
+__all__ = ["router", "sse_transport"]

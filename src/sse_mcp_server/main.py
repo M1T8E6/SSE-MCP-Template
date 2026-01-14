@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 
 from sse_mcp_server.config.settings import settings
 from sse_mcp_server.presentation.router import router as api_router
-from sse_mcp_server.presentation.v1.api import get_message_handler
+from sse_mcp_server.presentation.v1 import sse_transport
 
 
 @asynccontextmanager
@@ -54,9 +54,27 @@ async def validation_exception_handler(_request: Request, exc: RequestValidation
 
 app.include_router(api_router, prefix=settings.api_v1_str)
 
-# Mount the SSE message handler
-message_handler = get_message_handler()
-app.router.routes.append(message_handler)
+# Add the SSE messages POST endpoint as a raw ASGI app using Starlette's routing
+# We need to bypass FastAPI's response handling since handle_post_message
+# is a raw ASGI app that handles its own response
+from starlette.routing import Route as StarletteRoute
+
+
+class ASGIRoute(StarletteRoute):
+    """Custom route that treats the endpoint as a raw ASGI app."""
+
+    async def handle(self, scope, receive, send):
+        """Handle the request by calling the endpoint as a raw ASGI app."""
+        await self.endpoint(scope, receive, send)
+
+
+app.router.routes.append(
+    ASGIRoute(
+        path=f"{settings.api_v1_str}/messages",
+        endpoint=sse_transport.handle_post_message,
+        methods=["POST"],
+    )
+)
 
 if __name__ == "__main__":
     import uvicorn

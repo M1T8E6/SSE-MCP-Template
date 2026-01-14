@@ -11,6 +11,7 @@ from mcp import types
 from mcp.server import Server
 from pydantic import AnyUrl
 
+from sse_mcp_server.config.settings import settings
 from sse_mcp_server.infrastructure.tool_factory import (
     CalculatorTool,
     create_simple_tool,
@@ -21,7 +22,7 @@ from sse_mcp_server.infrastructure.tool_factory import (
 logger = logging.getLogger(__name__)
 
 # Create the MCP Server instance
-mcp_server = Server("sse-mcp-server")
+mcp_server = Server(name=settings.app_name, version=settings.version)
 
 
 def register_tools() -> None:
@@ -72,13 +73,13 @@ async def handle_read_resource(uri: AnyUrl) -> str:
         from sse_mcp_server.config.settings import settings
 
         return f"""Application Configuration:
-- Name: {settings.app_name}
-- Version: {settings.version}
-- Environment: {settings.environment.value}
-- Debug: {settings.debug}
-- Host: {settings.host}
-- Port: {settings.port}
-"""
+        - Name: {settings.app_name}
+        - Version: {settings.version}
+        - Environment: {settings.environment.value}
+        - Debug: {settings.debug}
+        - Host: {settings.host}
+        - Port: {settings.port}
+        """
     raise ValueError(f"Resource not found: {uri}")
 
 

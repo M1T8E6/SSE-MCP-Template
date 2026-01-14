@@ -8,7 +8,6 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Request, Response
 from mcp.server.sse import SseServerTransport
-from starlette.routing import Mount
 
 from sse_mcp_server.application.services import SystemHealthService
 from sse_mcp_server.config.settings import settings
@@ -73,14 +72,3 @@ async def handle_sse(request: Request) -> Response:
             streams[0], streams[1], mcp_server.create_initialization_options()
         )
     return Response()
-
-
-def get_message_handler() -> Mount:
-    """Get the SSE message handler mount point.
-
-    Returns:
-        Mount: Starlette mount for message handling
-    """
-    return Mount(
-        f"{settings.api_v1_str}/messages", app=sse_transport.handle_post_message
-    )
