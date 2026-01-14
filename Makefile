@@ -18,7 +18,7 @@ lint:
 	python -m pylint src/sse_mcp_server --fail-under=9.0 --fail-on=E
 
 gen-docs:
-	python export-openapi.py app.main:app
+	python export-openapi.py sse_mcp_server.main:app --app-dir src
 
 install:
 	uv pip install --system --upgrade -r requirements.txt
