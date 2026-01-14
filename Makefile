@@ -15,7 +15,7 @@ test-coverage:
 	coverage run -m pytest && coverage report -m
 
 lint:
-	pylint app frontend --fail-under=9.0 --fail-on=E
+	python -m pylint src/sse_mcp_server --fail-under=9.0 --fail-on=E
 
 gen-docs:
 	python export-openapi.py app.main:app

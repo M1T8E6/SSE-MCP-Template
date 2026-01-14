@@ -9,6 +9,7 @@ from typing import Any
 
 from mcp import types
 from mcp.server import Server
+from pydantic import AnyUrl
 
 from sse_mcp_server.infrastructure.tool_factory import (
     CalculatorTool,
@@ -57,7 +58,7 @@ async def handle_list_resources() -> list[types.Resource]:
     """List available resources."""
     return [
         types.Resource(
-            uri="config://app",
+            uri=AnyUrl("config://app"),
             name="App Config",
             mimeType="text/plain",
         )
@@ -65,9 +66,9 @@ async def handle_list_resources() -> list[types.Resource]:
 
 
 @mcp_server.read_resource()
-async def handle_read_resource(uri: str) -> str:
+async def handle_read_resource(uri: AnyUrl) -> str:
     """Read a specific resource."""
-    if uri == "config://app":
+    if str(uri) == "config://app":
         from sse_mcp_server.config.settings import settings
 
         return f"""Application Configuration:

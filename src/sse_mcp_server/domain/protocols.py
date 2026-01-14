@@ -17,3 +17,4 @@ class HealthService(Protocol):
         Returns:
             Dictionary with health status information
         """
+        return {}
