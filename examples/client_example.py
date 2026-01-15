@@ -14,7 +14,7 @@ from mcp.client.sse import sse_client
 
 async def main() -> None:
     """Main function to demonstrate MCP client usage."""
-    server_url = f"http://localhost:{os.getenv('APP_PORT', '5035')}{os.getenv('API_V1_STR', '/api/v1')}/sse"
+    server_url = f"http://localhost:{os.getenv('APP_PORT', '5001')}{os.getenv('API_V1_STR', '/mcp/v1')}/sse"
 
     print(f"Connecting to MCP server at {server_url}...")
 

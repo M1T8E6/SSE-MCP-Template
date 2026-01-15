@@ -6,7 +6,7 @@ from starlette import status
 @pytest.mark.asyncio
 async def test_health_check(async_client: AsyncClient) -> None:
     """Test the health check endpoint."""
-    response = await async_client.get("/api/v1/health")
+    response = await async_client.get("/mcp/v1/health")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert "status" in data

@@ -70,8 +70,6 @@ async def handle_list_resources() -> list[types.Resource]:
 async def handle_read_resource(uri: AnyUrl) -> str:
     """Read a specific resource."""
     if str(uri) == "config://app":
-        from sse_mcp_server.config.settings import settings
-
         return f"""Application Configuration:
         - Name: {settings.app_name}
         - Version: {settings.version}

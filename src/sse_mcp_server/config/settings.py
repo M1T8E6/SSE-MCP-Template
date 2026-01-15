@@ -140,9 +140,9 @@ class Settings:
             "DESCRIPTION",
             "A modular template for AI agents using Google ADK with hexagonal architecture",
         )
-        self.api_v1_str = os.getenv("API_V1_STR", "/api/v1")
+        self.api_v1_str = os.getenv("API_V1_STR", "/mcp/v1")
         self.host = os.getenv("APP_HOST", "0.0.0.0")
-        self.port = int(os.getenv("APP_PORT", "5035"))
+        self.port = int(os.getenv("APP_PORT", "5001"))
         self.debug = os.getenv("DEBUG", "false").lower() in ("true", "1", "yes")
 
         # Configuration objects

@@ -66,7 +66,7 @@ async def handle_sse(request: Request) -> Response:
     async with sse_transport.connect_sse(
         request.scope,
         request.receive,
-        request._send,  # pyright: ignore[reportPrivateUsage]
+        request._send,  # pylint: disable=protected-access
     ) as streams:
         await mcp_server.run(
             streams[0], streams[1], mcp_server.create_initialization_options()

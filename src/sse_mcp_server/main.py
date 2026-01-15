@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from starlette.routing import Route as StarletteRoute
 
 from sse_mcp_server.config.settings import settings
 from sse_mcp_server.presentation.router import router as api_router
@@ -54,12 +55,10 @@ async def validation_exception_handler(_request: Request, exc: RequestValidation
 
 app.include_router(api_router, prefix=settings.api_v1_str)
 
+
 # Add the SSE messages POST endpoint as a raw ASGI app using Starlette's routing
 # We need to bypass FastAPI's response handling since handle_post_message
 # is a raw ASGI app that handles its own response
-from starlette.routing import Route as StarletteRoute
-
-
 class ASGIRoute(StarletteRoute):
     """Custom route that treats the endpoint as a raw ASGI app."""
 

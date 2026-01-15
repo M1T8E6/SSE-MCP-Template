@@ -34,7 +34,7 @@ def test_settings_host_and_port() -> None:
 
 def test_settings_api_prefix() -> None:
     """Test API prefix."""
-    assert settings.api_v1_str == "/api/v1"
+    assert settings.api_v1_str == "/mcp/v1"
 
 
 def test_environment_helpers() -> None:
