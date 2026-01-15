@@ -6,14 +6,14 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/v1/health": {
+    "/mcp/v1/health": {
       "get": {
         "tags": [
           "v1"
         ],
         "summary": "Health Check",
         "description": "Health check endpoint.\n\nArgs:\n    service: Health service dependency\n\nReturns:\n    Dictionary with health status and version",
-        "operationId": "health_check_api_v1_health_get",
+        "operationId": "health_check_mcp_v1_health_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -24,7 +24,7 @@
                     "type": "string"
                   },
                   "type": "object",
-                  "title": "Response Health Check Api V1 Health Get"
+                  "title": "Response Health Check Mcp V1 Health Get"
                 }
               }
             }
@@ -32,14 +32,14 @@
         }
       }
     },
-    "/api/v1/sse": {
+    "/mcp/v1/sse": {
       "get": {
         "tags": [
           "v1"
         ],
         "summary": "Handle Sse",
         "description": "Handle Server-Sent Events (SSE) connection.\n\nEstablishes the SSE connection and manages the MCP server lifecycle.\n\nArgs:\n    request: FastAPI request object\n\nReturns:\n    Empty response after connection closes",
-        "operationId": "handle_sse_api_v1_sse_get",
+        "operationId": "handle_sse_mcp_v1_sse_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -55,7 +55,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:5035"
+      "url": "http://localhost:5001"
     }
   ]
 }

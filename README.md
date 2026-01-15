@@ -10,7 +10,6 @@ A production-ready, Domain-Driven Design (DDD) inspired template for building Mo
 - **Type Safety**: Strict type checking with `mypy` and comprehensive type hints
 - **DDD Architecture**: Clean separation of Domain, Application, Infrastructure, and Presentation layers
 - **Testing**: Configured with `pytest` and `pytest-asyncio`
-- **Modern Tooling**: `pyproject.toml` setup, `ruff` for linting/formatting, `Makefile` for common tasks
 
 ## Project Structure
 
@@ -39,43 +38,30 @@ src/sse_mcp_server/
 
 ```bash
 # Clone the template
-git clone <your-repo-url>
-cd sse-mcp-server
+git clone git@github.com:M1T8E6/SSE-MCP-Template.git
+cd sse-mcp-server 
 
-# Create virtual environment (optional but recommended)
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-make install
-# or
-pip install -e ".[dev]"
+# Open the project in the dev-container or set up a virtual environment
+uv venv venv
+source venv/bin/activate
 ```
 
 ### 2. Configuration
 
-Create a `.env` file in the root directory (optional):
-
-```ini
-PROJECT_NAME="My MCP Server"
-DEBUG=true
-VERSION="0.1.0"
+```bash
+make prepare-env
 ```
 
 ### 3. Running the Server
 
-Start the development server with hot-reload:
-
 ```bash
-make dev
+make run
 ```
 
-The server will start at `http://0.0.0.0:5035`.
-
 **Available endpoints:**
-- Health Check: `http://0.0.0.0:5035/api/v1/health`
-- SSE Connection: `http://0.0.0.0:5035/api/v1/sse`
-- MCP Messages: `http://0.0.0.0:5035/api/v1/messages` (POST)
+- Health Check: `http://0.0.0.0:5001/mcp/v1/health`
+- SSE Connection: `http://0.0.0.0:5001/mcp/v1/sse`
+- MCP Messages: `http://0.0.0.0:5001/mcp/v1/messages` (POST)
 
 ### 4. Development Workflow
 
@@ -83,14 +69,8 @@ The server will start at `http://0.0.0.0:5035`.
 # Run tests
 make test
 
-# Run tests with coverage
-make test-coverage
-
 # Lint and type check
 make lint
-
-# Format code
-make format
 
 # Clean cache and build files
 make clean
@@ -161,36 +141,8 @@ async def handle_call_tool(
 Run tests with:
 
 ```bash
-pytest
-# or
 make test
 ```
-
-Run tests with coverage:
-
-```bash
-make test-coverage
-```
-
-## Deployment
-
-For production deployment:
-
-1. Set `DEBUG=false` in your `.env` file
-2. Use a production-grade ASGI server:
-   ```bash
-   uvicorn sse_mcp_server.main:app --host 0.0.0.0 --port 5035 --workers 4
-   ```
-3. Consider using a reverse proxy (nginx, traefik) in front of uvicorn
-4. Enable HTTPS/TLS for secure connections
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and linting
-5. Submit a pull request
 
 ## License
 
