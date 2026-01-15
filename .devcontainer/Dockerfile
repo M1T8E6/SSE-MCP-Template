@@ -6,9 +6,7 @@ WORKDIR /app
 # do not add dev dependencies here  
 RUN apk update && apk upgrade && \
     apk add --no-cache \
-        ca-certificates \
-        nodejs \
-        npm
+        ca-certificates
 
 COPY requirements.txt .
 
