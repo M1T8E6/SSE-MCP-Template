@@ -3,16 +3,10 @@ prepare-env:
 
 run:
 	@echo "Starting MCP Server..."
-	python -m compileall . -q && python -m sse_mcp_server.main & tail -f /dev/null
-
-redis:
-	docker run -d --name redis -p 6379:6379 redis:alpine
+	PYTHONPATH=/app/src python -m compileall . -q && PYTHONPATH=/app/src python -m sse_mcp_server.main & tail -f /dev/null
 
 test:
-	python -m pytest tests/ -v --tb=short
-
-test-coverage:
-	coverage run -m pytest && coverage report -m
+	PYTHONPATH=/app/src python -m pytest tests/ -v --tb=short
 
 lint:
 	python -m pylint src/sse_mcp_server --fail-under=9.0 --fail-on=E
