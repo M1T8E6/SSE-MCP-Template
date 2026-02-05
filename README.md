@@ -44,6 +44,9 @@ cd sse-mcp-server
 # Open the project in the dev-container or set up a virtual environment
 uv venv venv
 source venv/bin/activate
+
+# Install dependencies
+uv pip install -r requirements.txt
 ```
 
 ### 2. Configuration
